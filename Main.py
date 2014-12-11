@@ -18,9 +18,10 @@ def MosaicImages(filePath, target):
     try:
 
         arcpy.Mosaic_management(filePath, target,  "LAST", "FIRST", "", "", "NONE", "0", "NONE")
-        print "Successfully Done" + filePath + " processed time:" + str(datetime.now().strftime("%Y-%m-%d %H %M %S"))
+        print "Successfully Done " + filePath + " --- processed time:" + datetime.now().strftime("%Y-%m-%d %H %M %S")
 
     except Exception as inst:
+        print "Fails to process " + filePath + " --- failed time:" + datetime.now().strftime("%Y-%m-%d %H %M %S")
         ST = CommonTask.ScheduledTask(filePath , inst , vLogFile , arcpy.GetMessages())
         ST.SendErrorMail()
         ST.UpdateLogFile()
@@ -34,14 +35,16 @@ if __name__ == '__main__':
     vCount = 0
     for name in fileNames:
 
-        print "Process " + name
+        print "Processing" + name
         vCount = vCount + 1
 
         MosaicImages(name,vTargetImage)
+
+
         print str(vCount) + " are processed out of " + str(len(fileNames))
 
 
-    print str(len(fileNames)) + " files were succcessfuly Done"
+    print str(len(fileNames)) + " files were succcessfuly Done " + " --- processed time:" + datetime.now().strftime("%Y-%m-%d %H %M %S")
 
 
 
