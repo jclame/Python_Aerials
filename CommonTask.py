@@ -7,7 +7,6 @@ import arcpy, os, smtplib, string ,fnmatch,  linecache
 import sys
 
 class ScheduledTask():
-
     def __init__(self, layerName, inst, fileName, message):
         self.LayerName = layerName
         self.Inst = inst
@@ -15,7 +14,6 @@ class ScheduledTask():
         self.Message = message
 
     #http://stackoverflow.com/questions/1724693/find-a-file-in-python
-
     @staticmethod
     def findFilesByPattern(namePattern, path):
         result =[]
